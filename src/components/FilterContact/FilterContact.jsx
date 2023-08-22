@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const FilterContact = ({ value, onInputChange }) => {
   return (
@@ -8,3 +9,8 @@ export const FilterContact = ({ value, onInputChange }) => {
     </>
   );
 };
+
+FilterContact.propTypes = {
+  value: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired
+}

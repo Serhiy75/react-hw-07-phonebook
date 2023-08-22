@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import css from './FormContact.module.css'
 
 export class FormContacts extends Component {
   handleSubmit = evt => {
@@ -12,7 +14,7 @@ export class FormContacts extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className={css.forma}>
         <label>Name</label>
         <input
           type="text"
@@ -29,8 +31,12 @@ export class FormContacts extends Component {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button type="submit">Add Contacts</button>
+        <button type="submit" className={css.formbtn}>Add Contacts</button>
       </form>
     );
   }
+}
+
+FormContacts.propTypes = {
+  addContact: PropTypes.func.isRequired
 }

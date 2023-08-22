@@ -1,0 +1,10 @@
+.forma{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 200px;
+
+}
+.formbtn{
+    margin-top: 10px;
+}

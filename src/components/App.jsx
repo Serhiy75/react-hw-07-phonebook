@@ -2,7 +2,7 @@ import { FormContacts } from './FormContacts/FormContacts';
 import { Component } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { FilterContact } from './FilterContact/FilterContact';
-
+import css from './App.module.css'
 export class App extends Component {
   state = {
     contacts: [
@@ -40,8 +40,8 @@ export class App extends Component {
         .includes(this.state.filter.toLowerCase());
     });
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <div className={css.container}>
+        <h1 className=''>Phonebook</h1>
         <FormContacts addContact={this.addContact} />
         <h2>Contacts</h2>
         <FilterContact
