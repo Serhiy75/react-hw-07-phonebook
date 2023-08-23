@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from './ContactList.module.css'
+import css from './ContactList.module.css';
 export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ul className={css.listname}>
@@ -8,9 +8,13 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
         return (
           <li key={id} className={css.listitem}>
             <span>
-            {name}: {number}
+              {name}: {number}
             </span>
-            <button data-id={id} onClick={onDeleteContact} className={css.btn}>
+            <button
+              // data-id={id}
+              onClick={() => onDeleteContact(id)}
+              className={css.btn}
+            >
               Delete
             </button>
           </li>
@@ -28,5 +32,4 @@ ContactList.propTypes = {
     })
   ),
   onDeleteContact: PropTypes.func.isRequired,
-  
 };

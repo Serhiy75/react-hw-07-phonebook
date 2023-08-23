@@ -2,7 +2,7 @@ import { FormContacts } from './FormContacts/FormContacts';
 import { Component } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { FilterContact } from './FilterContact/FilterContact';
-import css from './App.module.css'
+import css from './App.module.css';
 export class App extends Component {
   state = {
     contacts: [
@@ -13,10 +13,11 @@ export class App extends Component {
     ],
     filter: '',
   };
-  onDeleteContact = evt => {
+
+  onDeleteContact = idContact => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(({ id }) => {
-        return id !== evt.target.dataset.id;
+        return id !== idContact;
       }),
     }));
   };
@@ -25,8 +26,9 @@ export class App extends Component {
     if (this.state.contacts.some(({ name }) => name === contact.name)) {
       alert(`${contact.name} name is already in contacts`);
     } else {
-      this.state.contacts.push(contact);
-      this.setState({ ...this.state });
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, contact],
+      }));
     }
   };
   onFilterChange = evt => {
@@ -41,7 +43,7 @@ export class App extends Component {
     });
     return (
       <div className={css.container}>
-        <h1 className=''>Phonebook</h1>
+        <h1 className="">Phonebook</h1>
         <FormContacts addContact={this.addContact} />
         <h2>Contacts</h2>
         <FilterContact
