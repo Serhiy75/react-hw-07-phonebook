@@ -3,6 +3,10 @@ import { Component } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { FilterContact } from './FilterContact/FilterContact';
 import css from './App.module.css';
+import storage from '../helpers/storage';
+
+const LOCALSTORAGE_KEY = 'contacts';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -13,6 +17,19 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = storage.load(LOCALSTORAGE_KEY);
+    if (contacts) {
+      this.setState({ contacts });
+    }
+  }
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      storage.save(LOCALSTORAGE_KEY, contacts);
+    }
+  }
 
   onDeleteContact = idContact => {
     this.setState(prevState => ({
