@@ -3,7 +3,8 @@ import { Component } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { FilterContact } from './FilterContact/FilterContact';
 import css from './App.module.css';
-import { load, save } from '../helpers/storage';
+// import { load, save } from '../helpers/storage';
+import storage from '../helpers/storage';
 
 const LOCALSTORAGE_KEY = 'contacts';
 
@@ -14,7 +15,7 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    const contacts = load(LOCALSTORAGE_KEY);
+    const contacts = storage.load(LOCALSTORAGE_KEY);
     if (contacts) {
       this.setState({ contacts });
     }
@@ -22,7 +23,7 @@ export class App extends Component {
   componentDidUpdate(_, prevState) {
     const { contacts } = this.state;
     if (prevState.contacts !== contacts) {
-      save(LOCALSTORAGE_KEY, contacts);
+      storage.save(LOCALSTORAGE_KEY, contacts);
     }
   }
 
