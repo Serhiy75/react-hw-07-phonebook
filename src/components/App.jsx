@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { FilterContact } from './FilterContact/FilterContact';
 import css from './App.module.css';
-import storage from 'helpers/storage';
 
-const LOCALSTORAGE_KEY = storage;
+const LOCALSTORAGE_KEY = 'contacts';
 const initialState = [];
 
 export const App = () => {
@@ -15,7 +14,7 @@ export const App = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('LOCALSTORAGE_KEY', JSON.stringify(contacts));
+    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
   const onDeleteContact = idContact => {
