@@ -11,7 +11,7 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
               {name}: {number}
             </span>
             <button
-              // data-id={id}
+              type="button "
               onClick={() => onDeleteContact(id)}
               className={css.btn}
             >
