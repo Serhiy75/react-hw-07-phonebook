@@ -1,7 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilter } from 'redux/selectors';
+import { setFilter } from 'redux/actions';
 
-export const FilterContact = ({ value, onInputChange }) => {
+export const FilterContact = () => {
+  const dispatch = useDispatch();
+  const value = useSelector(selectFilter);
+  const onInputChange = evt => {
+    const { value } = evt.currentTarget;
+    dispatch(setFilter(value));
+  };
   return (
     <>
       <h3>Find contacts by name</h3>
@@ -9,8 +17,3 @@ export const FilterContact = ({ value, onInputChange }) => {
     </>
   );
 };
-
-FilterContact.propTypes = {
-  value: PropTypes.string.isRequired,
-  onInputChange: PropTypes.func.isRequired
-}

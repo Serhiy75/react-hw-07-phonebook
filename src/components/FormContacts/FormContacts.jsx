@@ -1,16 +1,30 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import css from './FormContact.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/actions';
+import { selectContact } from 'redux/selectors';
 
-export const FormContacts = ({ addContact }) => {
+export const FormContacts = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContact);
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    addContact({ number, name, id: nanoid() });
+    addContacts({ number, name });
     form.reset();
+  };
+  const addContacts = contact => {
+    const existingContact = contacts.some(
+      ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+    );
+
+    if (existingContact) {
+      alert(`${contact.name} name is already in contacts`);
+    } else {
+      dispatch(addContact(contact));
+    }
   };
   return (
     <form onSubmit={handleSubmit} className={css.forma}>
@@ -35,8 +49,4 @@ export const FormContacts = ({ addContact }) => {
       </button>
     </form>
   );
-};
-
-FormContacts.propTypes = {
-  addContact: PropTypes.func.isRequired,
 };
