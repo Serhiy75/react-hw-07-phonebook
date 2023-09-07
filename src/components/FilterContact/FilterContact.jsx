@@ -13,7 +13,13 @@ export const FilterContact = () => {
   return (
     <>
       <h3>Find contacts by name</h3>
-      <input type="text" value={value} onChange={onInputChange} />
+      <input
+        type="text"
+        id="filter"
+        name="filter"
+        onChange={onInputChange}
+        value={value}
+      />
     </>
   );
 };

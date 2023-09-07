@@ -2,8 +2,8 @@ import React from 'react';
 import css from './FormContact.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactSlice';
 import { nanoid } from 'nanoid';
+import { addContactsThunk } from 'redux/operations';
 
 export const FormContacts = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export const FormContacts = () => {
     if (existingContact) {
       alert(`${contact.name} name is already in contacts`);
     } else {
-      dispatch(addContact(contact));
+      dispatch(addContactsThunk(contact));
     }
   };
   return (
