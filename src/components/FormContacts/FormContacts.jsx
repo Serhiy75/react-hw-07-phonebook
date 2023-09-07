@@ -3,6 +3,7 @@ import css from './FormContact.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactSlice';
+import { nanoid } from 'nanoid';
 
 export const FormContacts = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export const FormContacts = () => {
     const form = evt.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    addContacts({ number, name });
+    addContacts({ number, name, id: nanoid() });
     form.reset();
   };
   const addContacts = contact => {
