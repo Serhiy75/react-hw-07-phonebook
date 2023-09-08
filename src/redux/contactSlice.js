@@ -1,13 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  addContactsThunk,
-  deleteContactsThunk,
-  fetchContactsThunk,
-} from './operations';
+import { addContact, deleteContact, fetchContact } from './operations';
 
 const rejected = (state, action) => {
-  [...state].isLoading = false;
-  [...state].error = action.payload;
+  state.isLoading = false;
+  state.error = action.payload;
 };
 
 const pending = state => {
@@ -15,28 +11,28 @@ const pending = state => {
   state.error = null;
 };
 
-export const contactSlice = createSlice({
+const contactSlice = createSlice({
   name: 'contacts',
   initialState: {
-    contacts: [],
+    items: [],
     isLoading: false,
     error: null,
   },
 
   extraReducers: builder => {
     builder
-      .addCase(fetchContactsThunk.fulfilled, (state, action) => {
-        state.contacts = action.payload;
+      .addCase(fetchContact.fulfilled, (state, action) => {
+        state.items = action.payload;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(addContactsThunk.fulfilled, (state, action) => {
-        state.contacts.push(action.payload);
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.items.push(action.payload);
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(deleteContactsThunk.fulfilled, (state, action) => {
-        state.contacts = state.contacts.filter(
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.items = state.items.filter(
           contact => contact.id !== action.payload.id
         );
         state.isLoading = false;
